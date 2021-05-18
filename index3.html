@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigment3</title>
+</head>
+<body>
+    <h1>Assigment3 Fecth Data Object</h1>
+    <button onclick="mintaData()">Tampil Data Covid Provinsi</button><br>
+   
+    <div id="hasil"></div>
+
+    <script>
+      
+        function mintaData(){
+            fetch(`https://indonesia-covid-19.mathdro.id/api/provinsi`)
+                .then((response) => response.json())
+                .then((json) => {
+                    let strhtml = `<ul>`
+                    // for (let i = 0; i < json.length; i++){
+                    //     strhtml += `<li>${json[i]}</li>`
+                    // }
+                    for (let key in json){
+                        strhtml += `<li><a href="${json[key]}">${key}</a>
+                            <img src="${json[key]}"></li>`
+                    }
+                    strhtml += `</ul>`
+                    document.getElementById("hasil").innerHTML = strhtml
+                })
+                .catch(err => {
+                    console.log(err)
+                    document.getElementById("hasil").innerHTML = err
+                })
+        }
+    </script>
+</body>
+</html>
